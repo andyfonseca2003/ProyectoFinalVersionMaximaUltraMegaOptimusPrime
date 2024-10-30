@@ -1,0 +1,41 @@
+<div class="col-12">
+    <div class="row m-0">
+        <section class="sidebar col-2 border-top border-dark">
+            <app-sidebar></app-sidebar>
+        </section>
+        <section class="col-10 p-1 mt-5">
+            <div class="contenedor_blanco col-11 mx-auto overflow-auto">
+                <h2 class="text-center p-3">Cartas Gantt</h2>
+                <div class="col-11 mx-auto">
+                    <table class="table table-success table-striped-columns">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Fecha creación</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (item of cartas; track $index) {
+                            <tr>
+                                <td>{{item.idCartaGantt}}</td>
+                                <td>{{item.nombreCartaGantt}}</td>
+                                <td>{{item.fechaCreacion}}</td>
+                                <td class="">
+                                    <button class="btn btn-warning me-2"
+                                        onclick="editarCarta()" type="submit">Editar</button>
+                                    <button class="btn btn-danger ms-2"
+                                        onclick="eliminarCartaGantt()">Eliminar</button>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+        </section>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+.login-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    width: 40%
+}
+
+.user-icon {
+    width: 100px; /* Tamaño de la imagen del icono del usuario */
+    background-color: black;
+    border-radius: 50% !important;
+}
+
+.login-container button {
+    background-color: #128055;
+    border: none;
+    color: white;
+    cursor: pointer;
+}

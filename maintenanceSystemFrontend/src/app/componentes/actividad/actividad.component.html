@@ -1,0 +1,58 @@
+<div class="col-12">
+    <div class="row m-0">
+        <section class="sidebar col-2 border-top border-dark">
+            <app-sidebar></app-sidebar>
+        </section>
+        <section class="col-10 p-1 mt-5">
+            <div class="contenedor_blanco col-11 mx-auto overflow-auto">
+                <h2 class="text-center p-3">Registrar actividades de mantenimiento</h2>
+                <div class="col-11 mx-auto">
+                    <div class="actividad-container">
+                        <form id="actividadForm" [formGroup]="actividadForm" (ngSubmit)="crearActividad()" novalidate=""
+                            class="col-12 text-left">
+                            <input type="text" id="id" name="id" formControlName="id" class="col-12 form-control"
+                                required hidden value={{id}}>
+                            <div class="col-12 px-2 mb-3">
+                                <label class="col-12 form-label">Nombre:</label>
+                                <input type="text" id="nombre" name="nombre" formControlName="nombre"
+                                    class="col-12 form-control" required>
+                            </div>
+                            <div class="row m-0">
+                                <div class="col-6 px-2 mb-3">
+                                    <label class="col-12 form-label">Fecha Inicial Planificada:</label>
+                                    <input type="date" id="fecha-inicial" name="fecha-inicial"
+                                        formControlName="fechaInicioPlanificada" class="col-12 form-control" required>
+                                </div>
+                                <div class="col-6 px-2 mb-3">
+                                    <label class="col-12 form-label">Fecha Final Planificada:</label>
+                                    <input type="date" id="fechaFinPlanificada" name="fecha-final"
+                                        formControlName="fechaFinPlanificada" class="col-12 form-control" required>
+                                </div>
+                            </div>
+                            <div class="row m-0">
+                                <div class="col-6 px-2 mb-3">
+                                    <label class="col-12 form-label">Hora Inicial Planificada:</label>
+                                    <input type="time" id="hora-inicial" name="hora-inicial"
+                                        formControlName="fechaInicioReal" class="col-12 form-control" required>
+                                </div>
+                                <div class="col-6 px-2 mb-3">
+                                    <label class="col-12 form-label">Hora Final Planificada:</label>
+                                    <input type="time" id="hora-final" name="hora-final" formControlName="fechaFinReal"
+                                        class="col-12 form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-12 px-2 mb-3-full">
+                                <label class="col-12 form-label">Descripción:</label>
+                                <textarea id="descripcion" name="descripcion" formControlName="descripcion"
+                                    class="col-12 form-control" required></textarea>
+                            </div>
+                            <div class="col-12 text-center">
+                                <button type="submit" class="btn btn-success col-2 my-2">Agregar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

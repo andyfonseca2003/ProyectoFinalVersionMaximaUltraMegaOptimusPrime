@@ -1,0 +1,22 @@
+<div class="col-12">
+    <div class="row m-0">
+        <section class="sidebar col-2 border-top border-dark">
+            <app-sidebar></app-sidebar>
+        </section>
+        <section class="col-10 p-1 mt-5">
+            <div class="contenedor_blanco col-11 mx-auto">
+                <h2 class="text-center p-3">Crear carta Gantt</h2>
+                <form id="cartaGantForm" [formGroup]="cartaGantForm" (ngSubmit)="createCartaGant()" novalidate="" class="col-12">
+                    <div class="col-12 px-2 mb-3">
+                        <label class="col-12 form-label">Nombre del proyecto</label>
+                        <input type="text" formControlName="nombreCartaGantt" placeholder="Ingrese el nombre del proyecto"
+                            class="col-12 form-control" required>
+                    </div>
+                    <div class="text-center py-2">
+                        <button class="boton-carta btn btn-success col-2" type="submit">Agregar</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</div>

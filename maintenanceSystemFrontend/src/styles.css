@@ -1,0 +1,31 @@
+body {
+    background-color: #1b1b1b !important;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #2a5246;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin: -8px;
+}
+
+header h1 {
+    color: white;
+    margin: 0;
+    font-size: 32px;
+}
+
+.dulzon {
+    width: 50px !important; /* Ajusta el tamaño de la imagen */
+    height: auto;
+}
+
+.sidebar {
+    background-color: #2f5242;
+    padding: 20px;
+    height: 88vh;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

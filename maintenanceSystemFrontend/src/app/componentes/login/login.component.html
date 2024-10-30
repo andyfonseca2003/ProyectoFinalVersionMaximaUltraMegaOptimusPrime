@@ -1,0 +1,21 @@
+<div class="login-container mx-auto p-1 mt-5">
+    <h2 class="text-center p-3">Login</h2>
+    <!-- Formulario de login -->
+    <form id="loginForm" [formGroup]="loginForm" (ngSubmit)="loguear()" novalidate="" class="col-12 text-left">
+        <div class="col-12 px-2 mb-3">
+            <label class="col-12 form-label">Email</label>
+            <input type="text" formControlName="email" placeholder="Ingrese el correo" class="col-12 form-control" required>
+        </div>
+        <div class="col-12 px-2 mb-3">
+            <label class="col-12 form-label">Contraseña:</label>
+            <input type="password" formControlName="password" placeholder="Ingrese la contraseña" class="col-12 form-control"
+                required>
+        </div>
+        <div class="col-12 px-2">
+            <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+        </div>
+        <div class="col-12 text-center">
+            <button type="submit" class="btn border col-3 mb-2" [disabled]="loginForm.invalid">Ingresar</button>
+        </div>
+    </form>
+</div>

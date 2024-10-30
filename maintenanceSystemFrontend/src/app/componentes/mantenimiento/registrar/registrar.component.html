@@ -1,0 +1,107 @@
+<div class="col-12">
+    <div class="row m-0">
+        <section class="sidebar col-2 border-top border-dark">
+            <app-sidebar></app-sidebar>
+        </section> 
+        <section class="col-10 p-1 mt-5">
+            <div class="contenedor_blanco col-11 mx-auto overflow-auto">
+                <h2 class="text-center p-3">Cartas Gantt Disponibles</h2>
+                <main class="col-11 mx-auto row">
+                    <section class="mantenimientos bg-light mx-auto p-2 col-7">
+                        <h4>Cartas Gantt Disponibles</h4>
+                        <table class="table table-success table-striped-columns">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Fecha de Creación</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (item of cartas; track $index) {
+                                <tr (click)="mostrarDetalle(item.idCartaGantt)">
+                                    <td>{{item.idCartaGantt}}</td>
+                                    <td>{{item.nombreCartaGantt}}</td>
+                                    <td>{{item.fechaCreacion}}</td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <p id="selectedCartaGantt">Carta Gantt seleccionada: Ninguna</p>
+                        <input type="hidden" id="idCartaGantt" value="">
+                    </section>
+                    <section class="detalle-mantenimiento col-5 overflow-auto">
+                        <h4>Detalles del Mantenimiento</h4>
+                        <form id="mantenimientoForm" [formGroup]="mantenimientoForm" (ngSubmit)="crearMantenimiento()"
+                            novalidate="" class="col-12 text-left">
+
+                            <div class="form-group">
+                                <label for="idMaquina">ID Carta Gantt</label>
+                                <input type="text" id="idMaquina" formControlName="idCartaGantt"
+                                    class="col-12 form-control bg-dark-subtle" required readonly="true" value={{idCarta}}>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="idMaquina">ID de la Máquina</label>
+                                <input type="text" id="idMaquina" formControlName="idMaquina"
+                                    class="col-12 form-control" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="idSupervisor">ID del Supervisor</label>
+                                <input type="text" id="idSupervisor" formControlName="idSupervisor"
+                                    class="col-12 form-control" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="nombre">Nombre del Mantenimiento</label>
+                                <input type="text" id="nombre" formControlName="nombre" class="col-12 form-control"
+                                    required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="fecha-inicio">Fecha inicial</label>
+                                <input type="date" id="fecha-inicio" formControlName="fechaInicio"
+                                    class="col-12 form-control" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="fecha-fin">Fecha final</label>
+                                <input type="date" id="fecha-fin" formControlName="fechaFin"
+                                    class="col-12 form-control" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="hora-inicio">Hora Inicio</label>
+                                <input type="time" id="hora-inicio" formControlName="fechaInicioReal"
+                                    class="col-12 form-control" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="hora-fin">Hora Fin</label>
+                                <input type="time" id="hora-fin" formControlName="fechaFinReal"
+                                    class="col-12 form-control" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="observacion">Observación</label>
+                                <textarea id="observacion" formControlName="observaciones" class="col-12 form-control"
+                                    required></textarea>
+                            </div>
+
+                            <div class="form-group audio-record">
+                                <button id="grabar-audio btn">
+                                    🎤 Grabar Audio
+                                </button>
+                            </div>
+
+                            <div class="col-12 text-center">
+                                <button type="submit" class="btn btn-success col-auto my-2">Agregar</button>
+                            </div>
+                        </form>
+                    </section>
+                </main>
+            </div>
+        </section>
+    </div>
+</div>
