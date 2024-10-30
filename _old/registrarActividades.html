@@ -1,0 +1,95 @@
+<!-- registrarActividades -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Actividades Mantenimiento - Dulzón S.A</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="images/icono.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <h1>Dulzón S.A</h1>
+        <img src="images/dulzon.png" alt="Dulzon" class="dulzon">
+        <h2>Registrar Actividades Mantenimiento</h2>
+    </header>
+    <div class="actividad-container">
+        <form class="form" id="activity-form">
+            <div class="form-group2">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+           
+            <div class="form-group2">
+                <label for="fecha-inicial">Fecha Inicial Planificada:</label>
+                <input type="date" id="fecha-inicial" name="fecha-inicial" required>
+            </div>
+            <div class="form-group2">
+                <label for="hora-inicial">Hora Inicial Planificada:</label>
+                <input type="time" id="hora-inicial" name="hora-inicial" required>
+            </div>
+            <div class="form-group2">
+                <label for="fecha-final">Fecha Final Planificada:</label>
+                <input type="date" id="fecha-final" name="fecha-final" required>
+            </div>
+            <div class="form-group2">
+                <label for="hora-final">Hora Final Planificada:</label>
+                <input type="time" id="hora-final" name="hora-final" required>
+            </div>
+            <div class="form-group2-full">
+                <label for="descripcion">Descripción:</label>
+                <textarea id="descripcion" name="descripcion" required></textarea>
+            </div>
+            <div class="agregar-container">
+                <button type="submit" class="btn-agregar">Agregar</button>
+            </div>
+        </form>
+    </div>
+    <button class="history-btn2" onclick="window.history.back();">Regresar</button>
+
+    <script>
+        // Obtener el ID de la Carta Gantt de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const idCartaGantt = urlParams.get('idCartaGantt');
+
+        document.getElementById('activity-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const actividadData = {
+                idActividadMantenimiento: "671355d9fe902b4282101983", // Puede dejarse como null si se autogenera
+                nombre: document.getElementById('nombre').value,
+                IdOperador: localStorage.getItem('operadorId'), // Asegúrate de que el ID del operador esté en localStorage
+                descripcion: document.getElementById('descripcion').value,
+                fechaInicioPlanificada: `${document.getElementById('fecha-inicial').value}T${document.getElementById('hora-inicial').value}`,
+                fechaFinPlanificada: `${document.getElementById('fecha-final').value}T${document.getElementById('hora-final').value}`,
+                fechaInicioReal: null, // Puede ser null si no se ha iniciado la actividad
+                fechaFinReal: null // Puede ser null si no se ha finalizado la actividad
+            };
+
+            // Recuperar el token de localStorage
+            const token = localStorage.getItem('token');
+
+            // Enviar solicitud para registrar la actividad asociada a la Carta Gantt
+            fetch(`http://localhost:8080/api/operador/registrar-actividad/${idCartaGantt}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(actividadData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error en la respuesta del servidor: ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert('Actividad registrada exitosamente');
+            })
+            .catch(error => console.error('Error al registrar la actividad:', error));
+        });
+    </script>
+</body>
+</html>

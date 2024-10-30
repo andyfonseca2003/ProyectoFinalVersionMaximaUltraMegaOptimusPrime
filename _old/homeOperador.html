@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Inicio - Operador</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        /* Estilo básico para el layout */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100%;
+            background-color: #1b1b1b;
+        }
+
+        /* Estilo para el encabezado */
+        header {
+            background-color: #154F38;
+            color: white;
+            text-align: center;
+            padding: 1px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1; /* Se asegura de que el header esté siempre visible */
+        }
+
+        header img.dulzon {
+            height: 20px;
+            margin-left: 15px;
+        }
+
+        /* Estilo para la barra lateral */
+        .sidebar {
+            background-color: #128055;
+           
+            width: 200px;
+            height: 100vh; /* Full height */
+            position: fixed;
+            top: 60px; /* Altura después del header */
+            left: 0;
+            padding: 15px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+        }
+
+        .sidebar a:hover {
+            background-color: #154F38;
+        }
+
+        /* Estilo para el contenido principal */
+        .content {
+            margin-left: 220px; /* Espacio para la barra lateral */
+            padding: 20px;
+            margin-top: 80px; /* Espacio para el header */
+            color: white;
+            min-height: calc(100vh - 80px);
+         /* Altura mínima para que el contenido llene la pantalla */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Dulzón S.A</h1>
+        <img src="images/dulzon.png" alt="Logo de Dulzón S.A" class="dulzon">
+    </header>
+
+    <div class="sidebar">
+        <a href="registrarMantenimiento.html">Programar Mantenimiento</a>
+        <a href="registrarActividades.html">Registrar Actividades de Mantenimiento</a>
+        <a href="cartaGantt.html">Crear Carta Gantt</a>
+       
+        <a href="listaMantenimientos.html">Lista de Mantenimientos</a>
+        <a href="listaGantt.html">Lista de Cartas Gantt</a>
+    </div>
+
+    <div class="content">
+        <h2>Bienvenido a la plataforma de mantenimiento de Dulzón S.A</h2>
+        <p>Selecciona una de las opciones del menú para comenzar.</p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

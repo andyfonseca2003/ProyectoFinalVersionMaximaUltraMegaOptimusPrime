@@ -1,0 +1,754 @@
+body {
+    background-color: #1b1b1b;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 98vh;
+}
+
+header {
+    position: absolute;
+    top: 0;
+    width: 97%;
+    background-color: #2a5246;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 129px;
+}
+
+.header-supervisor{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #2a5246;
+    color: white;
+}
+
+.left-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.title-container {
+    display: flex;
+    align-items: center;
+}
+
+.title-container h1 {
+    margin: 0;
+}
+
+.title-container img {
+    margin-left: 10px;
+    width: 50px; /* Ajusta el tamaño de la imagen según sea necesario */
+}
+
+.info-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.info-container h3 {
+    margin-right: 300px; /* Espacio entre el nombre del gerente y el nombre del proyecto */
+}
+
+.project-name {
+    font-size: 16px;
+}
+
+.right-section {
+    margin-left: auto;
+    font-size: 24px;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header h1 {
+    color: white;
+    margin: 0;
+    font-size: 32px;
+    top: -20px; /* Ajuste para subir la imagen */
+}
+
+
+h2 {
+    margin-top: 20px;
+    color: white;
+    margin: 0;margin-left: auto;
+}
+
+.dulzon {
+    width: 50px; /* Ajusta el tamaño de la imagen */
+    height: auto;
+    position: relative;
+    top: -10px; /* Ajuste para subir la imagen */
+    border-radius: 50%; /* Redondear la imagen, si es necesario */
+}
+
+.login-container {
+    background-color: #1b1b1b;
+    border-radius: 10px;
+    padding: 30px;
+    width: 400px;
+    text-align: center;
+    margin-top: 100px; /* Espacio para el header */
+}
+
+.actividad-container {
+    width: 80%;
+    max-width: 700px;
+    background-color: #1b1b1b;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 200px;
+}
+
+.login-container h2 {
+    color: white;
+    margin-bottom: 20px;
+}
+
+.login-container .logo {
+    margin-bottom: 20px;
+}
+
+.user-icon {
+    width: 80px; /* Tamaño de la imagen del icono del usuario */
+    margin-bottom: 20px;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"]
+{
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+.actividad-container input[type="text"],
+.actividad-container input[type="password"],
+.actividad-container input[type="date"],
+.actividad-container input[type="time"],
+.actividad-container textarea, 
+.actividad-container select {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+.login-container .forgot-password {
+    display: block;
+    color: #ccc;
+    margin-top: 10px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.login-container .forgot-password:hover {
+    text-decoration: underline;
+}
+
+.login-container button {
+    width: 60%;
+    padding: 10px;
+    background-color: #128055;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.actividad-container button {
+    width: 60%;
+    padding: 10px;
+    background-color: #128055;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-container button:hover {
+    background-color: #128055;
+}
+
+/* Botón "Ingresar Historial" */
+.history-btn {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background-color: #128055;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.history-btn2 {
+    position: absolute;
+    top: 200px;
+    left: 20px;
+    background-color: #128055;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.history-btn:hover {
+    background-color: #0e6740;
+}
+
+p{
+    text-align: left;
+    color: white;
+}
+
+.p-proyecto{
+    text-align: center;
+    color: white;
+}
+
+.container {
+    background-color: #1b1b1b;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+    color: white;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: row;
+    height: calc(100vh - 50px);
+}
+
+.mantenimientos {
+    flex: 2;
+    background-color: #1b1b1b;
+    padding: 20px;
+    border-right: 2px solid #1A3328;
+    height: 100%;
+    margin-top: 80px;
+}
+
+.mantenimientos h2 {
+    text-align: center;
+    margin-top: 70px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #1A3328;
+}
+
+table th, table td {
+    border: 1px solid #42B286;
+    padding: 10px;
+    text-align: left;
+    font-size: 14px;
+}
+
+table th {
+    background-color: #154F38;
+}
+
+table td {
+    background-color: #294835;
+}
+
+header .gerente {
+    font-size: 16px;
+    align-self: center;
+}
+
+
+.detalle-mantenimiento {
+    flex: 1;
+    background-color: #1b1b1b;
+    padding: 20px;
+    margin-top: 150px;
+}
+
+.detalle-mantenimiento h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="time"],
+.form-group input[type="date"],
+.form-group textarea {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    color: #000;
+}
+
+.form-group textarea{
+    height: 50px;
+}
+.actions {
+    display: flex;
+    flex-direction: column;
+}
+
+.actions button {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #128055;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.actions button:hover {
+    background-color: #128055;
+}
+
+.audio-record button {
+    width: 100%;
+    padding: 10px;
+    background-color: #128055;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.audio-record button:hover {
+    background-color: #128055;
+}
+
+.form {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas */
+    gap: 15px;
+}
+
+.form-group2 {
+    display: flex;
+    flex-direction: column;
+    grid-column: span 1; /* Ocupa una columna por defecto */
+}
+
+.form-group2-full {
+    grid-column: span 2; /* Para elementos que deben ocupar las dos columnas */
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #b7ffbe;
+}
+
+.form-group2 input, select, textarea {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    color: #000;
+    width: 95%;
+}
+
+.form-group2-full textarea {
+    resize: none;
+    height: 100px;
+    grid-column: span 2;
+}
+
+.form-group2 input[type="text"], 
+.form-group2 input[type="date"], 
+.form-group2 input[type="time"], 
+.form-group2 select {
+    background-color: #fff;
+    width: 95%;
+}
+
+.agregar-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn-agregar {
+    padding: 10px;
+    background-color: #128055;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-agregar:hover {
+    background-color: #1a3428;
+}
+
+.container2 {
+    width: 90%;
+    max-width: 1000px;
+    background-color: #1b1b1b;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 500px;
+}
+
+.content {
+    display: flex;
+    gap: 20px;
+}
+
+.sidebar {
+    width: 30%;
+    background-color: #2f5242;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.id-section {
+    text-align: center;
+    color: #b7ffbe;
+}
+
+.id-section h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.id-section p {
+    font-size: 1.2em;
+    word-wrap: break-word;
+}
+
+.main-content2 {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.status {
+    background-color: #2f5242;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 1.2em;
+    color: #b7ffbe;
+}
+
+.status span {
+    font-weight: bold;
+    color: #fff;
+}
+
+.info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    color: #b7ffbe;
+}
+
+.info input{
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #000;
+    font-size: 1em;
+    width: 95%;
+}
+
+.observation-section {
+    background-color: #2f5242;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.observation-section h3 {
+    margin-bottom: 10px;
+    color: #b7ffbe;
+}
+
+.observation-section select {
+    padding: 10px;
+    border-radius: 5px;
+    width: 98%;
+    border: none;
+    margin-bottom: 10px;
+}
+
+.observation-section textarea {
+    width: 95%;
+    padding: 10px;
+    height: 100px;
+    border-radius: 5px;
+    border: none;
+    resize: none;
+    font-size: 1em;
+    background-color: #fff;
+    color: #000;
+}
+
+.team-section {
+    background-color: #2f5242;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.team-section h3 {
+    margin-bottom: 10px;
+    color: #b7ffbe;
+}
+
+.team-section p {
+    font-size: 1.2em;
+    color: #b7ffbe;
+}
+
+.team-section ul {
+    list-style: none;
+    padding-left: 0;
+    color: #fff;
+}
+
+.team-section ul li {
+    margin-bottom: 5px;
+    font-size: 1.2em;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.voice-button {
+    font-size: 2em;
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.voice-button:hover {
+    color: #b7ffbe;
+}
+
+
+
+.container3 {
+    width: 90%;
+    max-width: 1200px;
+    background-color: #1b1b1b;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 500px;
+}
+
+.button-buscarM{
+    margin-top: 20px;
+}
+
+.search-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.search-section input {
+    width: 80%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+.search-section button {
+    padding: 10px 20px;
+    background-color: #128055;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.content3 {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.info-section {
+    width: 60%;
+}
+
+.info-section label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.info-section input {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #000;
+    font-size: 1em;
+}
+
+.team-section {
+    width: 35%;
+    background-color: #2f5242;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.team-section h3 {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: #b7ffbe;
+}
+
+.team-section ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.team-section ul li {
+    margin-bottom: 5px;
+    font-size: 1.2em;
+}
+
+.team-section p {
+    font-size: 1.2em;
+    color: #b7ffbe;
+}
+
+.observation-section2 {
+    margin-bottom: 30px;
+}
+
+.observation-section2 label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #b7ffbe;
+}
+
+.observation-section2 select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.observation-section2 textarea {
+    width: 98%;
+    height: 100px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: #fff;
+    color: #000;
+    resize: none;
+}
+
+.status-section2 {
+    text-align: center;
+    margin-bottom: 20px;
+    justify-content: center; /* Esto centra los botones */
+    gap: 10px; 
+}
+
+.status-btn {
+    padding: 15px 30px;
+    background-color: #128055;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.footer2 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.voice-button2 {
+    font-size: 2em;
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.voice-button2:hover {
+    color: #128055;
+}

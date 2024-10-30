@@ -1,0 +1,62 @@
+<!-- cartaGantt -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Carta Gantt - Dulzón S.A</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="images/icono.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <h1>Dulzón S.A</h1>
+        <img src="images/dulzon.png" alt="Dulzon" class="dulzon">
+        <h2>Crear Carta Gantt</h2>
+    </header>
+
+    <div class="login-container">
+        <form id="create-gantt-form">
+            <label>Nombre del proyecto</label>
+            <input type="text" id="nombreProyecto" placeholder="Ingrese el nombre del proyecto" required>
+            <br><br>
+            <button class="boton-carta" type="submit">Agregar</button>
+        </form>
+    </div>
+    <button class="history-btn2" onclick="window.history.back();">Regresar</button>
+
+    <script>
+        document.getElementById('create-gantt-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const nombreProyecto = document.getElementById('nombreProyecto').value;
+
+            // Crear objeto JSON para enviar al backend
+            const cartaGanttData = {
+                nombreCartaGantt: nombreProyecto,
+                fechaCreacion: new Date().toISOString(),
+                actividadesPlanificadas: [],
+                cuadrillas: []
+            };
+
+            // Recuperar el token de localStorage
+            const token = localStorage.getItem('token'); // Cambia 'token' por la clave real si es diferente
+
+            // Enviar solicitud para crear la Carta Gantt
+            fetch('http://localhost:8080/api/operador/crear-carta-Gantt', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}` // Añadir el token a los headers
+                },
+                body: JSON.stringify(cartaGanttData)
+            })
+            .then(response => response.text())
+            .then(cartaGanttId => {
+                // Redirigir a la página de registrar actividades con el ID de la Carta Gantt creada
+                window.location.href = `/registrarActividades.html?idCartaGantt=${cartaGanttId}`;
+            })
+            .catch(error => console.error('Error al crear la Carta Gantt:', error));
+        });
+    </script>
+</body>
+</html>

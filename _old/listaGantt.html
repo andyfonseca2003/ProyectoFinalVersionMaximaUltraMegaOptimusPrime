@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Cartas Gantt - Dulzón S.A</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Dulzón S.A</h1>
+        <img src="images/dulzon.png" alt="Logo de Dulzón S.A" class="dulzon">
+    </header>
+
+    <div class="content">
+        <h2>Lista de Cartas Gantt</h2>
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Fecha de Creación</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="cartasGanttTable">
+                <!-- Aquí se llenará la tabla con JavaScript -->
+            </tbody>
+        </table>
+        <a href="cartaGantt.html" class="btn btn-success">Crear Nueva Carta Gantt</a>
+    </div>
+
+    <script>
+        async function cargarCartasGantt() {
+            const token = localStorage.getItem('authToken');
+
+            try {
+                const response = await fetch('http://localhost:8080/api/sinAuth/obtener-lista-gantt', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Error al obtener las cartas Gantt');
+                }
+                const cartasGantt = await response.json();
+                const tableBody = document.getElementById('cartasGanttTable');
+
+                cartasGantt.forEach(carta => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${carta.idCartaGantt}</td>
+                        <td>${carta.nombreCartaGantt}</td>
+                        <td>${new Date(carta.fechaCreacion).toLocaleString()}</td>
+                        <td>
+                            <a href="editarCartaGantt.html?id=${carta.idCartaGantt}" class="btn btn-warning" onclick="guardarIdCarta('${carta.idCartaGantt}')">Editar</a>
+                            <button class="btn btn-danger" onclick="eliminarCartaGantt('${carta.idCartaGantt}')">Eliminar</button>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error(error);
+                alert('No se pudieron cargar las cartas Gantt.');
+            }
+        }
+
+        async function eliminarCartaGantt(idCartaGantt) {
+            const token = localStorage.getItem('authToken');
+
+            if (confirm('¿Estás seguro de que deseas eliminar esta carta Gantt?')) {
+                try {
+                    const response = await fetch(`http://localhost:8080/api/operador/eliminar-carta-gantt/${idCartaGantt}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Error al eliminar la carta Gantt');
+                    }
+
+                    alert('Carta Gantt eliminada con éxito.');
+                    location.reload(); // Recargar la página para actualizar la lista
+                } catch (error) {
+                    console.error(error);
+                    alert('No se pudo eliminar la carta Gantt.');
+                }
+            }
+        }
+
+        function guardarIdCarta(idCartaGantt) {
+            localStorage.setItem('idCartaGantt', idCartaGantt);
+        }
+
+        document.addEventListener('DOMContentLoaded', cargarCartasGantt);
+    </script>
+
+    <style>
+        body {
+            background-color: #1b1b1b;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            color: white;
+        }
+
+        header {
+            background-color: #2a5246;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .content {
+            padding: 20px;
+            color: #128055;
+        }
+
+        .dulzon {
+            max-height: 100px;
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

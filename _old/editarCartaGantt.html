@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Carta Gantt - Dulzón S.A</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Dulzón S.A</h1>
+        <img src="images/dulzon.png" alt="Logo de Dulzón S.A" class="dulzon">
+    </header>
+
+    <div class="content">
+        <h2>Editar Carta Gantt</h2>
+        <form id="editarCartaGanttForm">
+            <div class="form-group">
+                <label for="nombreCartaGantt">Nombre</label>
+                <input type="text" class="form-control" id="nombreCartaGantt" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            <a href="listaGantt.html" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+
+    <script>
+        async function cargarCartaGantt() {
+            const params = new URLSearchParams(window.location.search);
+            const idCartaGantt = params.get('id');
+            const token = localStorage.getItem('authToken');
+
+            try {
+                const response = await fetch(`http://localhost:8080/api/operador/obtener-carta-gantt/${idCartaGantt}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Error al cargar la carta Gantt');
+                }
+
+                const cartaGantt = await response.json();
+                document.getElementById('nombreCartaGantt').value = cartaGantt.nombreCartaGantt;
+            } catch (error) {
+                console.error(error);
+                alert('No se pudo cargar la carta Gantt para editar.');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', cargarCartaGantt);
+    </script>
+
+    <style>
+        body {
+            background-color: #1b1b1b;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            color: white;
+        }
+
+        header {
+            background-color: #2a5246;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .content {
+            padding: 20px;
+            color: #128055;
+        }
+
+        .dulzon {
+            max-height: 100px;
+        }
+    </style>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

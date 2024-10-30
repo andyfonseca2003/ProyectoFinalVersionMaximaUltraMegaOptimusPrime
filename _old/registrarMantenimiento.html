@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Mantenimiento - Dulzón S.A</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="images/icono.ico" type="image/x-icon">
+    <script>
+        function selectCartaGantt(idCartaGantt, nombre) {
+            document.getElementById('idCartaGantt').value = idCartaGantt;
+            document.getElementById('selectedCartaGantt').innerText = `Carta Gantt seleccionada: ${nombre}`;
+        }
+
+        function cargarCartasGantt() {
+            const token = localStorage.getItem('token');
+
+            fetch('http://localhost:8080/api/operador/obtener-cartas-gantts', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al cargar las cartas Gantt');
+                }
+                return response.json();
+            })
+            .then(cartasGantt => {
+                const tbody = document.querySelector('tbody');
+                tbody.innerHTML = '';
+                cartasGantt.forEach(carta => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${carta.idCartaGantt}</td>
+                        <td>${carta.nombreCartaGantt}</td>
+                        <td>${carta.fechaCreacion.substring(0, 10)}</td>
+                        <td>--</td>
+                        <td><button onclick="selectCartaGantt('${carta.idCartaGantt}', '${carta.nombreCartaGantt}')">Seleccionar</button></td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('No se pudieron cargar las cartas Gantt');
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', cargarCartasGantt);
+
+        function programarMantenimiento() {
+            const idMaquina = document.getElementById('idMaquina').value;
+            const idSupervisor = document.getElementById('idSupervisor').value;
+            const nombre = document.getElementById('nombre').value;
+            const fechaInicio = `${document.getElementById('fecha-inicio').value}T${document.getElementById('hora-inicio').value}:00`;
+            const fechaFin = `${document.getElementById('fecha-fin').value}T${document.getElementById('hora-fin').value}:00`;
+            const observaciones = document.getElementById('observacion').value;
+            const estadoMantenimiento = 'EN_PROCESO'; // Suponiendo que este es el estado predeterminado
+            const idCartaGantt = document.getElementById('idCartaGantt').value;
+
+            const mantenimientoDto = {
+                idMaquina,
+                idSupervisor,
+                nombre,
+                fechaInicio,
+                fechaFin,
+                fechaInicioReal: null, // Asumiendo que este campo puede ser null
+                fechaFinReal: null,
+                observaciones: [{ descripcion: observaciones }], // Cambiado a un objeto// Convertir a una lista
+                estadoMantenimiento,
+                idCartaGantt
+            };
+
+            console.log('DTO de mantenimiento:', mantenimientoDto); // Verificar los datos enviados
+
+            const token = localStorage.getItem('token');
+
+            fetch('http://localhost:8080/api/operador/programar-mantenimiento', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(mantenimientoDto),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error en la respuesta de la API');
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert(data.message);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al registrar el mantenimiento');
+            });
+        }
+    </script>
+</head>
+<body>
+
+<header class="header-supervisor">
+    <div class="left-section">
+        <div class="title-container">
+            <h1>Dulzón S.A</h1>
+            <img src="images/dulzon.png" alt="Dulzon" class="dulzon">
+        </div>
+        <div class="info-container">
+            <h3>Supervisor</h3>
+            <h3 class="project-name">Proyecto: Mantenimiento de Maquinaria</h3>
+        </div>
+    </div>
+    <h2 class="right-section">Registrar Mantenimiento</h2>
+</header>
+
+<main class="main-container">
+    <section class="mantenimientos">
+        <h2>Cartas Gantt Disponibles</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Fecha de Creación</th>
+                    <th>Fecha de Fin</th>
+                    <th>Seleccionar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Las filas de las cartas Gantt se cargarán aquí -->
+            </tbody>
+        </table>
+        <p id="selectedCartaGantt">Carta Gantt seleccionada: Ninguna</p>
+        <input type="hidden" id="idCartaGantt" value="">
+    </section>
+
+    <section class="detalle-mantenimiento">
+        <h2>Detalles del Mantenimiento</h2>
+
+        <div class="form-group">
+            <label for="idMaquina">ID de la Máquina</label>
+            <input type="text" id="idMaquina" required>
+        </div>
+
+        <div class="form-group">
+            <label for="idSupervisor">ID del Supervisor</label>
+            <input type="text" id="idSupervisor" required>
+        </div>
+
+        <div class="form-group">
+            <label for="nombre">Nombre del Mantenimiento</label>
+            <input type="text" id="nombre" required>
+        </div>
+
+        <div class="form-group">
+            <label for="fecha-inicio">Fecha inicial</label>
+            <input type="date" id="fecha-inicio" required>
+        </div>
+
+        <div class="form-group">
+            <label for="fecha-fin">Fecha final</label>
+            <input type="date" id="fecha-fin" required>
+        </div>
+
+        <div class="form-group">
+            <label for="hora-inicio">Hora Inicio</label>
+            <input type="time" id="hora-inicio" required>
+        </div>
+
+        <div class="form-group">
+            <label for="hora-fin">Hora Fin</label>
+            <input type="time" id="hora-fin" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="observacion">Observación</label>
+            <textarea id="observacion" required></textarea>
+        </div>
+        
+        <div class="form-group audio-record">
+            <button id="grabar-audio">
+                🎤 Grabar Audio
+            </button>
+        </div>
+
+        <div class="actions">
+            <button id="programar-mantenimiento" onclick="programarMantenimiento()">Registrar Mantenimiento</button>
+        </div>
+    </section>
+</main>
+
+<button class="history-btn">Regresar</button>
+
+</body>
+</html>

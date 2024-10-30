@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Mantenimientos - Dulzón S.A</title>
+ 
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+   
+</head>
+<body>
+
+    <header>
+        <h1>Dulzón S.A</h1>
+        <img src="images/dulzon.png" alt="Logo de Dulzón S.A" class="dulzon">
+    </header>
+
+    <div class="content">
+        <h2>Lista de Mantenimientos</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID Máquina</th>
+                    <th>ID Supervisor</th>
+                    <th>Nombre</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Fin</th>
+                    <th>Fecha Inicio Real</th>
+                    <th>Fecha Fin Real</th>
+                    <th>Estado Mantenimiento</th>
+                    <th>ID Carta Gantt</th>
+                </tr>
+            </thead>
+            <tbody id="mantenimientosTableBody">
+                <!-- Los datos de los mantenimientos se agregarán aquí dinámicamente -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Función para obtener los mantenimientos
+        async function obtenerMantenimientos() {
+            try {
+                const response = await fetch('http://localhost:8080/api/sinAuth/obtener-mantenimientos');
+                if (!response.ok) {
+                    throw new Error('Error al obtener los mantenimientos');
+                }
+                const mantenimientos = await response.json();
+                const tableBody = document.getElementById('mantenimientosTableBody');
+                tableBody.innerHTML = ''; // Limpiar la tabla antes de agregar datos
+
+                mantenimientos.forEach(mantenimiento => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${mantenimiento.idMaquina}</td>
+                        <td>${mantenimiento.idSupervisor}</td>
+                        <td>${mantenimiento.nombre}</td>
+                        <td>${new Date(mantenimiento.fechaInicio).toLocaleString()}</td>
+                        <td>${new Date(mantenimiento.fechaFin).toLocaleString()}</td>
+                        <td>${mantenimiento.fechaInicioReal ? new Date(mantenimiento.fechaInicioReal).toLocaleString() : 'N/A'}</td>
+                        <td>${new Date(mantenimiento.fechaFinReal).toLocaleString()}</td>
+                        <td>${mantenimiento.estadoMantenimiento}</td>
+                        <td>${mantenimiento.idCartaGantt}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error(error);
+                alert('No se pudieron cargar los mantenimientos.');
+            }
+        }
+
+        // Llamar a la función al cargar la página
+        document.addEventListener('DOMContentLoaded', obtenerMantenimientos);
+    </script>
+
+<style>
+    body {
+        background-color: #1b1b1b;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 98vh;
+    }
+
+    header {
+        position: absolute;
+        top: 0;
+        width: 97%;
+        background-color: #2a5246;
+        padding: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 129px;
+        color: white; /* Color de texto en el encabezado */
+    }
+
+    .header-supervisor {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        background-color: #2a5246;
+        color: white;
+    }
+
+    .content {
+        padding: 20px;
+        color: #128055; /* Color secundario */
+    }
+
+    table {
+        margin-top: 20px;
+        width: 100%;
+        border-collapse: collapse; /* Colapsar bordes de la tabla */
+    }
+
+    th, td {
+        text-align: center;
+        padding: 10px;
+        border: 1px solid #2a5246; /* Borde de la tabla */
+        color: white; /* Color del texto en la tabla */
+    }
+
+    th {
+        background-color: #128055; /* Color de fondo de los encabezados de la tabla */
+    }
+
+    tr:nth-child(even) {
+        background-color: #2a5246; /* Color de las filas pares */
+    }
+
+    tr:nth-child(odd) {
+        background-color: #1b1b1b; /* Color de las filas impares */
+    }
+
+    /* Estilo para el logo */
+    .dulzon {
+        max-height: 100px; /* Ajustar el tamaño del logo */
+    }
+</style>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

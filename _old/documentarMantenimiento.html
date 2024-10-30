@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentar Mantenimiento - Dulzón S.A</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="images/icono.ico" type="image/x-icon">
+</head>
+<body>
+
+    <header>
+        <h1>Dulzón S.A</h1>
+        <img src="images/dulzon.png" alt="Dulzon" class="dulzon">
+        <h2>Documentar Mantenimiento</h2>
+</header>
+
+    <div class="container3">
+        <div class="search-section">
+            <label for="idMantenimiento">IdMantenimiento</label>
+            <input type="text" id="idMantenimiento" value="e0abf58f-910d-46e0-be65-ad0766ba295" readonly>
+            <button class="button-buscarM">Buscar Mantenimiento</button>
+        </div>
+
+        <div class="content3">
+            <div class="info-section">
+                <label for="maquina">Máquina</label>
+                <input type="text" id="maquina" readonly>
+
+                <label for="fecha">Fecha</label>
+                <input type="text" id="fecha" readonly>
+
+                <label for="horaInicio">Hora Inicio</label>
+                <input type="text" id="horaInicio" readonly>
+
+                <label for="horaFin">Hora Fin</label>
+                <input type="text" id="horaFin" readonly>
+            </div>
+
+            <div class="team-section">
+                <h3>Cuadrilla</h3>
+                <ul>
+                    <li>Carlos Ramírez</li>
+                    <li>Juan Pérez</li>
+                    <li>Miguel Torres</li>
+                    <li>Luis Sánchez</li>
+                    <li>Andrés Gómez</li>
+                </ul>
+
+                <p>Retraso: <span>SÍ</span></p>
+            </div>
+        </div>
+
+        <div class="observation-section2">
+            <label for="observacion">Observación</label>
+            <select id="observacion">
+                <option>Observación 1</option>
+                <option>Observación 2</option>
+                <option>Observación 3</option>
+            </select>
+            <textarea readonly></textarea>
+        </div>
+
+        <div class="status-section2">
+            <button class="status-btn">EstadoMantenimiento: FINALIZADO</button>
+            <button class="status-btn">EstadoMaquina: EN_FUNCIONAMIENTO</button>
+        </div>
+
+        <footer class="footer2">
+            <button class="voice-button2">🔊</button>
+        </footer>
+    </div>
+</body>
+</html>
