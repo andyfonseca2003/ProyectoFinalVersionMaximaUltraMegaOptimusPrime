@@ -1,10 +1,8 @@
 package co.edu.uniquindio.dulzonmaintenancesystem.dto;
 
 import co.edu.uniquindio.dulzonmaintenancesystem.Enums.EstadoMantenimiento;
-import co.edu.uniquindio.dulzonmaintenancesystem.modelo.mantenimiento.Observacion;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public record ListaMantenimientoDTO(
 

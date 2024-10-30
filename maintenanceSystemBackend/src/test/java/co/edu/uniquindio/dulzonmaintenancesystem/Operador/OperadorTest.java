@@ -30,13 +30,13 @@ public class OperadorTest {
         trabajadores.add(new Trabajador(2, "Ana", "Plomera", "empresa2"));
 
         List<Cuadrilla> cuadrillas = new ArrayList<>();
-        cuadrillas.add(new Cuadrilla("1234","cuadrilla1",trabajadores));
+        cuadrillas.add(new Cuadrilla("1234", "cuadrilla1", trabajadores));
 
         List<ActividadMantenimiento> actividades = new ArrayList<>();
         actividades.add(new ActividadMantenimiento("1", "Reparación de tuberías", "1", "Reparar tuberías",
                 LocalDateTime.now(), LocalDateTime.now().plusDays(1), null, null));
 
-        DtoCrearCartaGantt cartaGanttDTO = new DtoCrearCartaGantt(actividades,cuadrillas,LocalDateTime.now(),"proyecto1");
+        DtoCrearCartaGantt cartaGanttDTO = new DtoCrearCartaGantt(actividades, cuadrillas, LocalDateTime.now(), "proyecto1");
         servicioOperadorImp.crearCartaGantt(cartaGanttDTO);
 
         // Aquí puedes agregar aserciones para verificar que el objeto fue creado correctamente
@@ -45,7 +45,7 @@ public class OperadorTest {
 
 
     @Test
-    public void editarCartaGantt(){
+    public void editarCartaGantt() {
         String idCartaGantt = "6714b40d5fbf905a1f927f6b";
         // Preparar datos de prueba
         List<Trabajador> trabajadores = new ArrayList<>();
@@ -53,26 +53,24 @@ public class OperadorTest {
         trabajadores.add(new Trabajador(2, "San", "Plomera", "empresa2"));
 
         List<Cuadrilla> cuadrillas = new ArrayList<>();
-        cuadrillas.add(new Cuadrilla("2010","cuadrilla1",trabajadores));
+        cuadrillas.add(new Cuadrilla("2010", "cuadrilla1", trabajadores));
 
         List<ActividadMantenimiento> actividades = new ArrayList<>();
         actividades.add(new ActividadMantenimiento("1", "Reparación de tuberías", "1", "Reparar tuberías",
                 LocalDateTime.now(), LocalDateTime.now().plusDays(1), null, null));
 
-        DtoCrearCartaGantt cartaGanttDTO = new DtoCrearCartaGantt(actividades,cuadrillas,LocalDateTime.now(),"ProyectPrueba1");
-        servicioOperadorImp.editarCartaGantt(idCartaGantt,cartaGanttDTO);
+        DtoCrearCartaGantt cartaGanttDTO = new DtoCrearCartaGantt(actividades, cuadrillas, LocalDateTime.now(), "ProyectPrueba1");
+        servicioOperadorImp.editarCartaGantt(idCartaGantt, cartaGanttDTO);
 
         // Aquí puedes agregar aserciones para verificar que el objeto fue creado correctamente
         assertNotNull(cartaGanttDTO); // Asegúrate de que el DTO no es nulo
     }
 
     @Test
-    public void eliminarCartaGantt(){
+    public void eliminarCartaGantt() {
         String idCartaGannt = "6714b40d5fbf905a1f927f6b";
         servicioOperadorImp.eliminarCartaGantt(idCartaGannt);
     }
-
-
 
 
 }

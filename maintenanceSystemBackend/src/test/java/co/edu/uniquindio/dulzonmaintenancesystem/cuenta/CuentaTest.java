@@ -28,7 +28,7 @@ public class CuentaTest {
                 "123",
                 Rol.SUPERVISOR,
                 EstadoCuenta.ACTIVA
-               
+
 
         );
         DtoCrearPersona nuevaPersonaDTO = new DtoCrearPersona(

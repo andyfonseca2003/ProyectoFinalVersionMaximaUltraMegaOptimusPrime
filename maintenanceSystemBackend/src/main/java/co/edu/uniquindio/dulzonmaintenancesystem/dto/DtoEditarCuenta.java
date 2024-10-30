@@ -4,8 +4,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-import java.time.LocalDateTime;
-
 public record DtoEditarCuenta(
         @NotBlank(message = "El teléfono no puede estar vacío")
         @Pattern(

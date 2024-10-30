@@ -6,7 +6,7 @@ import co.edu.uniquindio.dulzonmaintenancesystem.Enums.TipoMaquina;
 import java.time.LocalDateTime;
 
 public record MaquinaDTO(
-
+        String id,
         LocalDateTime fechaAdquisicion,
         String descripcion,
         LocalDateTime ultimoMantenimiento,

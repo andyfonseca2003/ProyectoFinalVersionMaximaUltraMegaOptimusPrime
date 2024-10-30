@@ -6,11 +6,15 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface RepositorioCuenta extends MongoRepository<Cuenta, String> {
     Optional<Cuenta> findByEmail(String email);
+
     @Query("{'_id': ?0}")
     Optional<Persona> findByCedula(String cedula);
+
+    List<Cuenta> findByRol(String rol);
 }

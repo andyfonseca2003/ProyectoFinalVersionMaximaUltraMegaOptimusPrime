@@ -1,54 +1,26 @@
 package co.edu.uniquindio.dulzonmaintenancesystem.controller;
 
-import co.edu.uniquindio.dulzonmaintenancesystem.dto.*;
-import co.edu.uniquindio.dulzonmaintenancesystem.servicios.serviciosInterfaces.ServiciosOperador;
-import jakarta.validation.Valid;
+import co.edu.uniquindio.dulzonmaintenancesystem.dto.MaquinaDTO;
+import co.edu.uniquindio.dulzonmaintenancesystem.servicios.serviciosInterfaces.ServiciosMaquina;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/operador")
+@RequestMapping("/api/maquina")
 public class MaquinaController {
 
-    private final ServiciosOperador serviciosOperador;
+    private final ServiciosMaquina serviciosMaquina;
 
-    @PostMapping("/programar-mantenimiento")
-    public ResponseEntity<MessageDTO<String>> programarMantenimiento(@Valid @RequestBody MatenimientoDTO mantenimientoDto) throws Exception {
-        serviciosOperador.programarMantenimiento(mantenimientoDto);
-        return ResponseEntity.ok(new MessageDTO<>(false, "El mantenimiento se creo exitosamente"));
+    @GetMapping("/all")
+    public ResponseEntity<List<MaquinaDTO>> obtenerMaquinas() throws Exception {
+        List<MaquinaDTO> mantenimientos = serviciosMaquina.obtenerMaquinas();
+        return ResponseEntity.ok(mantenimientos); // Retorna la lista de DTOs con un estado HTTP 200 OK
     }
-
-    @PostMapping("/registrar-actividad")
-    public ResponseEntity<MessageDTO<String>> registrarActividad(@Valid @RequestBody ActividadDTO actividadDTO) {
-        serviciosOperador.registarActividadmantenimiento(actividadDTO);
-        return ResponseEntity.ok(new MessageDTO<>(false, "La Actividad se asigno (registro) exitosamente"));
-
-    }
-
-    @PostMapping("/crear-carta-Gantt")
-    public ResponseEntity<Map<String, String>> crearCartaGantt(@Valid @RequestBody DtoCrearCartaGantt cartaGantt) {
-        String cartaGanttId = serviciosOperador.crearCartaGantt(cartaGantt);
-        Map<String, String> respuesta = new HashMap<>();
-        respuesta.put("respuesta", cartaGanttId);
-        return ResponseEntity.ok(respuesta);
-    }
-
-    @GetMapping("/obtener-carta-gantt/{idCartGannt}")
-    public DtoCrearCartaGantt obtenerCartasGanttEspecifica(@PathVariable String idCartGannt) {
-        DtoCrearCartaGantt dtoCrearCartaGantt = serviciosOperador.obtenerCartasGanttEspecifica(idCartGannt);
-        return dtoCrearCartaGantt;
-    }
-
-    @PutMapping("/editar-gantt/{idCartaGantt}")
-    public String editarGantt(@Valid @RequestBody DtoEditarCartaGantt cartaGanttActualizada) throws Exception {
-        String cartaGanttId = serviciosOperador.editarCartaGantt(cartaGanttActualizada);
-        return cartaGanttId;
-    }
-
 
 }

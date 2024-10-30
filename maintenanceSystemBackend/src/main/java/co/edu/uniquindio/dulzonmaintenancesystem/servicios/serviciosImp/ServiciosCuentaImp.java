@@ -16,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.security.auth.login.AccountNotFoundException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -148,6 +150,21 @@ public class ServiciosCuentaImp implements ServiciosCuenta {
                 cuenta.getEmail()
         );
 
+    }
+
+    @Override
+    public List<InfoSupervisorDTO> obtenerSupervisores() {
+        List<Cuenta> listaSupervisores = repositorioCuenta.findByRol("SUPERVISOR");
+        List<InfoSupervisorDTO> listaSupervisorDTOs = new ArrayList<>();
+
+        for (Cuenta cuenta : listaSupervisores) {
+            listaSupervisorDTOs.add(new InfoSupervisorDTO(
+                    cuenta.getIdCuenta(),
+                    cuenta.getPersona().getNombre() + " " + cuenta.getPersona().getApellido()
+            ));
+        }
+
+        return listaSupervisorDTOs;
     }
 
     private Map<String, Object> construirClaims(Cuenta cuenta) {

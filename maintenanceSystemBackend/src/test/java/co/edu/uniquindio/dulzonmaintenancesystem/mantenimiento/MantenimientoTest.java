@@ -58,7 +58,7 @@ public class MantenimientoTest {
     @Test
     public void registrarActividadMantenimientoTest() {
 
-        String idMantenimienento= "67152569b140dd5ed6b27987";
+        String idMantenimienento = "67152569b140dd5ed6b27987";
         // Crear un DTO de actividad
         ActividadDTO actividadDTO = new ActividadDTO(
 
@@ -72,41 +72,39 @@ public class MantenimientoTest {
         );
 
         // Registrar la actividad en el mantenimiento
-        servicioOperador.registarActividadmantenimiento(idMantenimienento,actividadDTO);
+        servicioOperador.registarActividadmantenimiento(idMantenimienento, actividadDTO);
 
-}
+    }
 
     @Test
-    public void iniciarMantenimientoTest(){
-        String idMantenimiento= "67146f8d703ae618a1d12b18";
+    public void iniciarMantenimientoTest() {
+        String idMantenimiento = "67146f8d703ae618a1d12b18";
         serviciosSupervisor.iniciarMantenimiento(idMantenimiento);
     }
 
     @Test
-    public void finalizarMantenimientoTest(){
-        String idMantenimiento= "67146f8d703ae618a1d12b18";
+    public void finalizarMantenimientoTest() {
+        String idMantenimiento = "67146f8d703ae618a1d12b18";
         serviciosSupervisor.finalizarMantenimiento(idMantenimiento);
     }
 
 
     @Test
-    public void iniciarActividadTest(){
-        String idCartaGantt="6714b92f37fb95677ff28d97";
-        String idActividad="6c1043fa-ab25-45da-9a72-b971fd8a5976";
+    public void iniciarActividadTest() {
+        String idCartaGantt = "6714b92f37fb95677ff28d97";
+        String idActividad = "6c1043fa-ab25-45da-9a72-b971fd8a5976";
 
-        serviciosSupervisor.iniciarActividad(idCartaGantt,idActividad);
+        serviciosSupervisor.iniciarActividad(idCartaGantt, idActividad);
     }
 
     @Test
-    public void finalizarActividadTest(){
-        String idCartaGantt="6714b92f37fb95677ff28d97";
-        String idActividad="6c1043fa-ab25-45da-9a72-b971fd8a5976";
+    public void finalizarActividadTest() {
+        String idCartaGantt = "6714b92f37fb95677ff28d97";
+        String idActividad = "6c1043fa-ab25-45da-9a72-b971fd8a5976";
 
 
-        serviciosSupervisor.finalizarActividad(idCartaGantt,idActividad);
+        serviciosSupervisor.finalizarActividad(idCartaGantt, idActividad);
     }
-
-
 
 
 }

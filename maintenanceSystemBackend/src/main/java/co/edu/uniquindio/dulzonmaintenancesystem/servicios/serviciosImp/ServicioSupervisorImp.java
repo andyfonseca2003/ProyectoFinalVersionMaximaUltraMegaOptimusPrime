@@ -90,9 +90,8 @@ public class ServicioSupervisorImp implements ServiciosSupervisor {
     }
 
 
-
     /**
-     *  Servicio para iniciar una actividad (Modifica el atributo de fecha inicio real)
+     * Servicio para iniciar una actividad (Modifica el atributo de fecha inicio real)
      *
      * @param idMantenimiento
      */
@@ -109,7 +108,7 @@ public class ServicioSupervisorImp implements ServiciosSupervisor {
     }
 
     /**
-     *  Servicio para finalizar una actividad ( Mpodifica el atributo de fecha final real)
+     * Servicio para finalizar una actividad ( Mpodifica el atributo de fecha final real)
      *
      * @param idMantenimiento
      */
@@ -128,6 +127,7 @@ public class ServicioSupervisorImp implements ServiciosSupervisor {
 
     /**
      * Metodo auxiliar para buscar una actividad dentro de un mantenimiento.
+     *
      * @param idActividad
      * @return
      */

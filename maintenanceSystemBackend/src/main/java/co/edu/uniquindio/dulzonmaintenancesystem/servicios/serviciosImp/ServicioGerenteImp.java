@@ -1,9 +1,7 @@
 package co.edu.uniquindio.dulzonmaintenancesystem.servicios.serviciosImp;
 
 import co.edu.uniquindio.dulzonmaintenancesystem.Enums.EstadoCuenta;
-import co.edu.uniquindio.dulzonmaintenancesystem.Exception.Cuenta.InvalidPasswordException;
 import co.edu.uniquindio.dulzonmaintenancesystem.dto.DtoEditarCuentaAdmi;
-import co.edu.uniquindio.dulzonmaintenancesystem.dto.DtoPassword;
 import co.edu.uniquindio.dulzonmaintenancesystem.modelo.usuarios.Cuenta;
 import co.edu.uniquindio.dulzonmaintenancesystem.repositorio.RepositoriosUsuarios.RepositorioCuenta;
 import co.edu.uniquindio.dulzonmaintenancesystem.servicios.serviciosInterfaces.ServiciosGerente;

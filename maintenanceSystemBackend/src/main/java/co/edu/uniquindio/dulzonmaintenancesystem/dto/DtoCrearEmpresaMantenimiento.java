@@ -1,7 +1,6 @@
 package co.edu.uniquindio.dulzonmaintenancesystem.dto;
 
 import co.edu.uniquindio.dulzonmaintenancesystem.modelo.EmpresaExterna.Cuadrilla;
-import org.springframework.data.annotation.Id;
 
 import java.util.List;
 

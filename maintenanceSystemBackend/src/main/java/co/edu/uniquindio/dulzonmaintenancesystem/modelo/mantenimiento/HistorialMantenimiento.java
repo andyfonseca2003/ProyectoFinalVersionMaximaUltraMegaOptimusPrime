@@ -25,5 +25,4 @@ public class HistorialMantenimiento {
     private List<Observacion> observaciones;
 
 
-
 }

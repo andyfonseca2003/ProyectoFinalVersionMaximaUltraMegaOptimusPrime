@@ -26,5 +26,4 @@ public class Maquina {
     private EstadoMaquina estadoMaquina;
 
 
-
 }

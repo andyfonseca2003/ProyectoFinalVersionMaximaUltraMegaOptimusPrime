@@ -16,10 +16,10 @@ import java.util.List;
 public class sinAutenticacionController {
 
     private final ServiciosCuenta serviciosCuenta;
-    private  final ServiciosOperador   serviciosOperador;
+    private final ServiciosOperador serviciosOperador;
 
     @PostMapping("/login")
-    public ResponseEntity<MessageDTO<TokenDTO>> iniciarSesion(@Valid @RequestBody DtoLogin login) throws Exception{
+    public ResponseEntity<MessageDTO<TokenDTO>> iniciarSesion(@Valid @RequestBody DtoLogin login) throws Exception {
         TokenDTO token = serviciosCuenta.iniciarSesion(login);
         return ResponseEntity.ok(new MessageDTO<>(false, token));
     }

@@ -2,7 +2,7 @@
     <div class="row m-0">
         <section class="sidebar col-2 border-top border-dark">
             <app-sidebar></app-sidebar>
-        </section> 
+        </section>
         <section class="col-10 p-1 mt-5">
             <div class="contenedor_blanco col-11 mx-auto overflow-auto">
                 <h2 class="text-center p-3">Cartas Gantt Disponibles</h2>
@@ -38,19 +38,29 @@
                             <div class="form-group">
                                 <label for="idMaquina">ID Carta Gantt</label>
                                 <input type="text" id="idMaquina" formControlName="idCartaGantt"
-                                    class="col-12 form-control bg-dark-subtle" required readonly="true" value={{idCarta}}>
+                                    class="col-12 form-control bg-dark-subtle" required readonly="true"
+                                    value={{idCarta}}>
                             </div>
 
                             <div class="form-group">
-                                <label for="idMaquina">ID de la Máquina</label>
-                                <input type="text" id="idMaquina" formControlName="idMaquina"
-                                    class="col-12 form-control" required>
+                                <label for="idMaquina">Máquina</label>
+                                <select name="" id="" formControlName="idMaquina" class="col-12 form-control" required>
+                                    <option selected disabled>Seleccione una maquina</option>
+                                    @for (item of maquinas; track $index) {
+                                    <option value={{item.id}}>{{item.descripcion}}</option>
+                                    }
+                                </select>
                             </div>
 
                             <div class="form-group">
-                                <label for="idSupervisor">ID del Supervisor</label>
-                                <input type="text" id="idSupervisor" formControlName="idSupervisor"
-                                    class="col-12 form-control" required>
+                                <label for="idSupervisor">Supervisor</label>
+                                <select name="" id="" formControlName="idSupervisor" class="col-12 form-control"
+                                    required>
+                                    <option selected disabled>Seleccione un supervisor</option>
+                                    @for (item of supervisores; track $index) {
+                                    <option value={{item.id}}>{{item.nombre}}</option>
+                                    }
+                                </select>
                             </div>
 
                             <div class="form-group">
@@ -67,8 +77,8 @@
 
                             <div class="form-group">
                                 <label for="fecha-fin">Fecha final</label>
-                                <input type="date" id="fecha-fin" formControlName="fechaFin"
-                                    class="col-12 form-control" required>
+                                <input type="date" id="fecha-fin" formControlName="fechaFin" class="col-12 form-control"
+                                    required>
                             </div>
 
                             <div class="form-group">

@@ -3,9 +3,7 @@ package co.edu.uniquindio.dulzonmaintenancesystem.maquina;
 import co.edu.uniquindio.dulzonmaintenancesystem.Enums.EstadoMaquina;
 import co.edu.uniquindio.dulzonmaintenancesystem.Enums.TipoMaquina;
 import co.edu.uniquindio.dulzonmaintenancesystem.dto.MaquinaDTO;
-import co.edu.uniquindio.dulzonmaintenancesystem.modelo.maquina.Maquina;
 import co.edu.uniquindio.dulzonmaintenancesystem.repositorio.RepositoriosMaquina.RepositorioMaquina;
-import co.edu.uniquindio.dulzonmaintenancesystem.servicios.serviciosImp.ServicioSupervisorImp;
 import co.edu.uniquindio.dulzonmaintenancesystem.servicios.serviciosInterfaces.ServiciosSupervisor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +20,7 @@ public class MaquinaTest {
     private RepositorioMaquina repositorioMaquina;
 
     @Test
-    public void crearMaquinaTest(){
+    public void crearMaquinaTest() {
         // Crear un MaquinaDTO para la prueba
         MaquinaDTO maquinaDTO = new MaquinaDTO(
                 LocalDateTime.now(),

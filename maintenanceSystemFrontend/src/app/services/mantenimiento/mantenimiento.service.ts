@@ -17,8 +17,20 @@ export class MantenimientoService {
     );
   }
 
+  public getAllMaquinas(): Observable<any> {
+    return this.http.get("http://localhost:8080/api/maquina/all").pipe(
+      catchError(this.handleError) // Añadimos el manejo de errores
+    );
+  }
+
   public getAllCartasGrant(): Observable<any> {
     return this.http.get("http://localhost:8080/api/sinAuth/obtener-lista-gantt").pipe(
+      catchError(this.handleError) // Añadimos el manejo de errores
+    );
+  }
+
+  public getAllSupervisores(): Observable<any> {
+    return this.http.get("http://localhost:8080/api/cuenta/find-supervisores").pipe(
       catchError(this.handleError) // Añadimos el manejo de errores
     );
   }

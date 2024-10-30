@@ -14,12 +14,16 @@ import { MantenimientoRequest } from '../../../services/mantenimiento/Mantenimie
 })
 export class RegistrarComponent {
   cartas: any[] = [];  // Inicializa la variable cartas como un array vacío
+  maquinas: any[] = [];  // Inicializa la variable cartas como un array vacío
+  supervisores: any[] = [];  // Inicializa la variable cartas como un array vacío
   mantenimientoForm!: FormGroup;
   idCarta:string = "";
 
   constructor(private mantenimientoService:MantenimientoService, private router:Router, private formBuilder: FormBuilder) {
     this.crearFormulario();
     this.getAllCartasGrant();
+    this.getAllMaquinas();
+    this.getAllSupervisores();
   }
 
   private crearFormulario() {
@@ -57,6 +61,36 @@ export class RegistrarComponent {
       next:(response) => {
         console.log(response);
         this.cartas = response;
+      },
+      error: (errorData) =>{
+         console.error(errorData);
+      },
+      complete: () =>{
+        console.log("well done");
+     },
+    })
+  }
+
+  public getAllMaquinas() {
+    this.mantenimientoService.getAllMaquinas().subscribe({
+      next:(response) => {
+        console.log(response);
+        this.maquinas = response;
+      },
+      error: (errorData) =>{
+         console.error(errorData);
+      },
+      complete: () =>{
+        console.log("well done");
+     },
+    })
+  }
+
+  public getAllSupervisores() {
+    this.mantenimientoService.getAllSupervisores().subscribe({
+      next:(response) => {
+        console.log(response);
+        this.supervisores = response;
       },
       error: (errorData) =>{
          console.error(errorData);
