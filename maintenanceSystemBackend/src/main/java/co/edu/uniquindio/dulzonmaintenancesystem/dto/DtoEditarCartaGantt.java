@@ -8,8 +8,8 @@ import java.util.List;
 
 public record DtoEditarCartaGantt(
         @NotNull String idCartaGantt,
-        @NotNull String nombreCartaGantt,
-        List<Cuadrilla> cuadrillas,
-        List<ActividadMantenimiento> actividadesPlanificadas
+        @NotNull String nombreCartaGantt
+//        List<Cuadrilla> cuadrillas,
+//        List<ActividadMantenimiento> actividadesPlanificadas
 ) {
 }

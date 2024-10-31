@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { cartaGanttRequest } from './CartaGanttRequest';
+import { editarCartaGanttRequest } from './EditarCartaGanttRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -30,4 +31,17 @@ export class CartaGantService {
     }
     return throwError(() => new Error('Algo falló. Por favor intente nuevamente.'));
   }
+
+  deleteCartaGant(idCartGannt: string): Observable<any> {
+    return this.http.delete("http://localhost:8080/api/operador/eliminar",{"body": idCartGannt}).pipe(
+      catchError(this.handleError) // Añadimos el manejo de errores
+    );
+  }
+
+  updateCartaGant(cartaGant: editarCartaGanttRequest): Observable<any> {
+    return this.http.put<any>("http://localhost:8080/api/operador/editar", cartaGant).pipe(
+      catchError(this.handleError) // Añadimos el manejo de errores
+    );
+  }
+
 }

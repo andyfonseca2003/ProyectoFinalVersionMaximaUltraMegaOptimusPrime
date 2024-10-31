@@ -21,8 +21,6 @@ public class CartaGantt {
     private String idCartaGantt;
     private String idOperador;
     private String idEmpresa;
-    private List<ActividadMantenimiento> actividadesPlanificadas;
-    private List<Cuadrilla> cuadrillas;
     private LocalDateTime fechaCreacion;
     private String nombreCartaGantt;
 

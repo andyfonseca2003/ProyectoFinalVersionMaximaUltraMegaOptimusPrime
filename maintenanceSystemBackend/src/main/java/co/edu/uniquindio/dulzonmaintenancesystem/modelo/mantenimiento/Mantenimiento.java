@@ -1,6 +1,7 @@
 package co.edu.uniquindio.dulzonmaintenancesystem.modelo.mantenimiento;
 
 import co.edu.uniquindio.dulzonmaintenancesystem.Enums.EstadoMantenimiento;
+import co.edu.uniquindio.dulzonmaintenancesystem.modelo.EmpresaExterna.Cuadrilla;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -26,6 +27,8 @@ public class Mantenimiento {
     private LocalDateTime fechaFin;
     private LocalDateTime fechaInicioReal; // puede ser null
     private LocalDateTime fechaFinReal;    // puede ser null
+    private List<ActividadMantenimiento> actividadesPlanificadas;
+    private List<Cuadrilla> cuadrillas;
     private List<Observacion> observaciones;
     private EstadoMantenimiento estadoMantenimiento;
     private String idCartaGantt;

@@ -8,8 +8,6 @@ public record ActividadDTO(
         String IdOperador,
         String descripcion,
         LocalDateTime fechaInicioPlanificada,
-        LocalDateTime fechaFinPlanificada,
-        LocalDateTime fechaInicioReal, // puede ser null
-        LocalDateTime fechaFinReal // puede ser null
+        LocalDateTime fechaFinPlanificada
 ) {
 }

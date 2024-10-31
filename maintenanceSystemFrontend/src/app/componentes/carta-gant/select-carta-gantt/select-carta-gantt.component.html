@@ -24,9 +24,9 @@
                                 <td>{{item.fechaCreacion}}</td>
                                 <td class="">
                                     <button class="btn btn-warning me-2"
-                                        onclick="editarCarta()" type="submit">Editar</button>
+                                    (click)="editarCarta(item)" type="submit">Editar</button>
                                     <button class="btn btn-danger ms-2"
-                                        onclick="eliminarCartaGantt()">Eliminar</button>
+                                    (click)="eliminarCarta(item.idCartaGantt)">Eliminar</button>
                                 </td>
                             </tr>
                             }

@@ -44,10 +44,18 @@ public class OperadorController {
         return dtoCrearCartaGantt;
     }
 
-    @PutMapping("/editar-gantt/{idCartaGantt}")
-    public String editarGantt(@Valid @RequestBody DtoEditarCartaGantt cartaGanttActualizada) throws Exception {
+    @PutMapping("/editar")
+    public ResponseEntity<MensajeDTO<String>> editarGantt(@Valid @RequestBody DtoEditarCartaGantt cartaGanttActualizada) throws Exception {
         String cartaGanttId = serviciosOperador.editarCartaGantt(cartaGanttActualizada);
-        return cartaGanttId;
+        return ResponseEntity.ok(new MensajeDTO<>(false, "Carta Gantt editada"));
+
+    }
+
+    @DeleteMapping("/eliminar")
+    public ResponseEntity<MensajeDTO<String>> eliminarGantt(@Valid @RequestBody String idCartGannt) throws Exception {
+        String msj = serviciosOperador.eliminarCartaGantt(idCartGannt);
+        return ResponseEntity.ok(new MensajeDTO<>(false, "Carta Gantt eliminada"));
+
     }
 
 

@@ -1,5 +1,6 @@
 package co.edu.uniquindio.dulzonmaintenancesystem.servicios.serviciosImp;
 
+import co.edu.uniquindio.dulzonmaintenancesystem.Enums.EstadoMantenimiento;
 import co.edu.uniquindio.dulzonmaintenancesystem.Exception.CartaGantt.CartaGanttNotFoundException;
 import co.edu.uniquindio.dulzonmaintenancesystem.Exception.Mantenimiento.MaquinaNoEspecificadaExepcion;
 import co.edu.uniquindio.dulzonmaintenancesystem.dto.*;
@@ -8,6 +9,7 @@ import co.edu.uniquindio.dulzonmaintenancesystem.modelo.EmpresaExterna.Trabajado
 import co.edu.uniquindio.dulzonmaintenancesystem.modelo.mantenimiento.ActividadMantenimiento;
 import co.edu.uniquindio.dulzonmaintenancesystem.modelo.mantenimiento.CartaGantt;
 import co.edu.uniquindio.dulzonmaintenancesystem.modelo.mantenimiento.Mantenimiento;
+import co.edu.uniquindio.dulzonmaintenancesystem.modelo.mantenimiento.Observacion;
 import co.edu.uniquindio.dulzonmaintenancesystem.repositorio.RepositoriosMantenimiento.RepositorioCartaGantt;
 import co.edu.uniquindio.dulzonmaintenancesystem.repositorio.RepositoriosMantenimiento.RepositorioMantenimiento;
 import co.edu.uniquindio.dulzonmaintenancesystem.repositorio.RepositoriosMaquina.RepositorioMaquina;
@@ -36,10 +38,6 @@ public class ServicioOperadorImp implements ServiciosOperador {
         nuevaCartaGantt.setNombreCartaGantt(cartaGantt.nombreCartaGantt());
         nuevaCartaGantt.setFechaCreacion(LocalDateTime.now());
 
-        // Crear y asignar cuadrillas
-        List<Cuadrilla> cuadrillas = new ArrayList<>();
-        nuevaCartaGantt.setCuadrillas(cuadrillas);
-
         CartaGantt crearCuentaGannt = repositorioCartaGantt.save(nuevaCartaGantt);
         return crearCuentaGannt.getIdCartaGantt();
 
@@ -61,22 +59,22 @@ public class ServicioOperadorImp implements ServiciosOperador {
 
         // Actualizar las cuadrillas
         List<Cuadrilla> cuadrillasActualizadas = new ArrayList<>();
-        for (Cuadrilla cuadrillaDTO : cartaGanttActualizada.cuadrillas()) {
-            Cuadrilla cuadrilla = new Cuadrilla();
-            cuadrilla.setNombre(cuadrillaDTO.getNombre());
-
-            // Actualizar los trabajadores de la cuadrilla
-            List<Trabajador> trabajadoresActualizados = new ArrayList<>(cuadrillaDTO.getTrabajadores());
-            cuadrilla.setTrabajadores(trabajadoresActualizados);
-
-            cuadrillasActualizadas.add(cuadrilla);
-        }
-        cartaGantt.setCuadrillas(cuadrillasActualizadas);
+//        for (Cuadrilla cuadrillaDTO : cartaGanttActualizada.cuadrillas()) {
+//            Cuadrilla cuadrilla = new Cuadrilla();
+//            cuadrilla.setNombre(cuadrillaDTO.getNombre());
+//
+//            // Actualizar los trabajadores de la cuadrilla
+//            List<Trabajador> trabajadoresActualizados = new ArrayList<>(cuadrillaDTO.getTrabajadores());
+//            cuadrilla.setTrabajadores(trabajadoresActualizados);
+//
+//            cuadrillasActualizadas.add(cuadrilla);
+//        }
+//        cartaGantt.setCuadrillas(cuadrillasActualizadas);
 
         // Actualizar las actividades planificadas
-        List<ActividadMantenimiento> actividadesActualizadas =
-                new ArrayList<>(cartaGanttActualizada.actividadesPlanificadas());
-        cartaGantt.setActividadesPlanificadas(actividadesActualizadas);
+//        List<ActividadMantenimiento> actividadesActualizadas =
+//                new ArrayList<>(cartaGanttActualizada.actividadesPlanificadas());
+//        cartaGantt.setActividadesPlanificadas(actividadesActualizadas);
 
         // Guardar la carta Gantt modificada
         CartaGantt cartaGanttModificada = repositorioCartaGantt.save(cartaGantt);
@@ -85,11 +83,6 @@ public class ServicioOperadorImp implements ServiciosOperador {
         return cartaGanttModificada.getIdCartaGantt();
     }
 
-    /**
-     * Servicio para programar el mantenimiento de una maquina
-     *
-     * @param mantenimientoDto
-     */
     @Override
     public void programarMantenimiento(MatenimientoDTO mantenimientoDto) throws MaquinaNoEspecificadaExepcion {
         // Validar si la máquina existe
@@ -108,8 +101,12 @@ public class ServicioOperadorImp implements ServiciosOperador {
         mantenimiento.setIdSupervisor(mantenimientoDto.idSupervisor());
         mantenimiento.setFechaInicio(mantenimientoDto.fechaInicio());
         mantenimiento.setFechaFin(mantenimientoDto.fechaFin());
-        mantenimiento.setObservaciones(mantenimientoDto.observaciones());
-        mantenimiento.setEstadoMantenimiento(mantenimientoDto.estadoMantenimiento());
+        if (mantenimientoDto.observaciones()==null) {
+            List<Observacion> observacionesActualizadas = new ArrayList<>();
+            observacionesActualizadas.add(new Observacion(mantenimientoDto.observaciones()));
+            mantenimiento.setObservaciones(observacionesActualizadas);
+        }
+        mantenimiento.setEstadoMantenimiento(EstadoMantenimiento.EN_PROCESO);
         mantenimiento.setNombre(mantenimientoDto.nombre());
         mantenimiento.setIdCartaGantt(mantenimientoDto.idCartaGantt()); // Asociar la carta de Gantt al mantenimiento
 
@@ -117,21 +114,16 @@ public class ServicioOperadorImp implements ServiciosOperador {
         repositorioMantenimiento.save(mantenimiento);
     }
 
-    /**
-     * Servicio para asignar una actividad de mantenimiento a una carta de Gantt.
-     *
-     * @param actividadDTO
-     */
     @Override
     public void registarActividadmantenimiento(ActividadDTO actividadDTO) {
         // Verificar si la carta de Gantt existe
-        Optional<CartaGantt> cartaGanttOpt = repositorioCartaGantt.findById(actividadDTO.id());
-        if (cartaGanttOpt.isEmpty()) {
-            throw new IllegalArgumentException("La carta de Gantt especificada no existe.");
+        Optional<Mantenimiento> mantenimientoOpt = repositorioMantenimiento.findByIdCartaGantt(actividadDTO.id());
+        if (mantenimientoOpt.isEmpty()) {
+            throw new IllegalArgumentException("El mantenimiento especificado no existe.");
         }
 
         // Obtener la carta de Gantt encontrada
-        CartaGantt cartaGantt = cartaGanttOpt.get();
+        Mantenimiento mantenimiento = mantenimientoOpt.get();
 
         // Crear una nueva actividad a partir del DTO
         ActividadMantenimiento nuevaActividad = new ActividadMantenimiento();
@@ -142,13 +134,18 @@ public class ServicioOperadorImp implements ServiciosOperador {
         nuevaActividad.setFechaInicioPlanificada(actividadDTO.fechaInicioPlanificada());
         nuevaActividad.setFechaFinPlanificada(actividadDTO.fechaFinPlanificada());
 
-        // Agregar la nueva actividad a la carta de Gantt
-        cartaGantt.getActividadesPlanificadas().add(nuevaActividad);
+        if(mantenimiento.getActividadesPlanificadas() ==  null){
+            List<ActividadMantenimiento> actividadesPlanificadas = new ArrayList<>();
+            actividadesPlanificadas.add(nuevaActividad);
+            mantenimiento.setActividadesPlanificadas(actividadesPlanificadas);
+        }else{
+            // Agregar la nueva actividad a la carta de Gantt
+            mantenimiento.getActividadesPlanificadas().add(nuevaActividad);
+        }
 
         // Guardar la carta de Gantt actualizada en la base de datos
-        repositorioCartaGantt.save(cartaGantt);
+        repositorioMantenimiento.save(mantenimiento);
     }
-
 
     @Override
     public String eliminarCartaGantt(String idCartaGantt) {
@@ -163,7 +160,6 @@ public class ServicioOperadorImp implements ServiciosOperador {
 
         return "La cartaGantt con id " + idCartaGantt + " fue eliminada correctamente.";
     }
-
 
     @Override
     public List<CartaGanttDTO> obtenerCartasGantt() {

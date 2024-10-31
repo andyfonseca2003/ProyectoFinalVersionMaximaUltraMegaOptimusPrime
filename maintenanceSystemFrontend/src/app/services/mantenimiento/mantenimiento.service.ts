@@ -12,7 +12,7 @@ export class MantenimientoService {
   constructor(private http: HttpClient) { }
 
   public getAllMantenimientos(): Observable<any> {
-    return this.http.get("http://localhost:8080/api/sinAuth/obtener-lista-gantt").pipe(
+    return this.http.get("http://localhost:8080/api/sinAuth/obtener-mantenimientos").pipe(
       catchError(this.handleError) // Añadimos el manejo de errores
     );
   }
@@ -40,7 +40,7 @@ export class MantenimientoService {
       catchError(this.handleError) // Añadimos el manejo de errores
     );
   }
-  
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       console.error('Se ha producido un error:', error.error);

@@ -18,6 +18,7 @@ export const routes: Routes = [
    { path: 'cartaGantt', component: CartaGantComponent, canActivate:[authGuard]  },
    { path: 'cartaGantt/all', component: SelectCartaGanttComponent, canActivate:[authGuard]  },
    { path: 'actividad', component: ActividadComponent, canActivate:[authGuard]  },
+   { path: 'actividad/:id', component: ActividadComponent, canActivate:[authGuard]  },
    { path: "**", pathMatch: "full", redirectTo: "login" },
    { path: 'historico', component: PublicMantenimientoComponent },
    

@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public record MatenimientoDTO(
-
         String idMaquina,
         String idSupervisor,
         String nombre,
@@ -15,11 +14,9 @@ public record MatenimientoDTO(
         LocalDateTime fechaFin,
         LocalDateTime fechaInicioReal, // puede ser null
         LocalDateTime fechaFinReal,
-        List<Observacion> observaciones,
+        String observaciones,
         EstadoMantenimiento estadoMantenimiento,
         String idCartaGantt
-
-
 ) {
 
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { SidebarComponent } from "../shared/sidebar/sidebar.component";
 import { CartaGantService } from '../../services/carta-gant/carta-gant.service';
 import { MantenimientoService } from '../../services/mantenimiento/mantenimiento.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { MantenimientoService } from '../../services/mantenimiento/mantenimiento
 })
 export class MantenimientoComponent {
   mantenimientos: any[] = [];  // Inicializa la variable cartas como un array vacío
-  constructor(private mantenimientoService:MantenimientoService) {
+  constructor(private mantenimientoService:MantenimientoService, private router : Router) {
     this.getAllMantenimientos();
   }
 
@@ -30,5 +31,9 @@ export class MantenimientoComponent {
         console.log("well done");
      },
     })
+  }
+
+  agregarActividad(idMantenimiento: string){
+    this.router.navigate(['/actividad', idMantenimiento]); // Redirige a la ruta con el parámetro
   }
 }
